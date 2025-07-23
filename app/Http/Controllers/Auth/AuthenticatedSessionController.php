@@ -24,6 +24,8 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        // dd($request->all()); // Debugging line to check request data
+
         $request->authenticate();
 
         $request->session()->regenerate();
