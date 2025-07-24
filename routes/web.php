@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;;
+
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Backend\BrandController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,6 +23,15 @@ Route::middleware('auth')->group(function () {
     // Route::get('/admin/change/password', [AdminController::class, 'ChangePassword'])->name('admin.change.password');
     // Route::post('/admin/update/password', [AdminController::class, 'UpdatePassword'])->name('admin.update.password');
 });
-
-require __DIR__.'/auth.php';
+//BrandController
+Route::middleware('auth')->group(function () {
+    Route::controller(BrandController::class)->group(function () {
+        Route::get('/admin/brand/view', 'AdminBrandView')->name('admin.brands.index');
+        Route::get('/admin/brand/create', 'AdminBrandCreate')->name('admin.brands.create');
+        Route::post('/admin/brand/store', 'AdminBrandStore')->name('admin.brands.store');
+        // Route::get('/admin/brand/edit/{id}', 'AdminBrandEdit')->name('admin.brands.edit');
+        Route::post('/admin/brand/update/{id}', 'AdminBrandUpdate')->name('admin.brands.update');
+    });
+});
+require __DIR__ . '/auth.php';
 Route::get('/admin/logout', [AdminController::class, 'Adminlogout'])->name('admin.logout');
