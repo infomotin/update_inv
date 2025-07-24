@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\WareHouseController;
+use App\Http\Controllers\Backend\SupplierController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -47,6 +48,16 @@ Route::middleware('auth')->group(function () {
         Route::delete('/admin/warehouse/destroy/{id}', 'AdminWareHouseDestroy')->name('admin.warehouses.destroy');
     });
 });
-
+//SupplierController
+Route::middleware('auth')->group(function () {
+    Route::controller(SupplierController::class)->group(function () {
+        Route::get('/admin/supplier/view', 'AdminSupplierView')->name('admin.suppliers.index');
+        Route::get('/admin/supplier/create', 'AdminSupplierCreate')->name('admin.suppliers.create');
+        Route::post('/admin/supplier/store', 'AdminSupplierStore')->name('admin.suppliers.store');
+        // Route::get('/admin/supplier/edit/{id}', 'AdminSupplierEdit')->name('admin.suppliers.edit');
+        Route::post('/admin/supplier/update/{id}', 'AdminSupplierUpdate')->name('admin.suppliers.update');
+        Route::delete('/admin/supplier/destroy/{id}', 'AdminSupplierDestroy')->name('admin.suppliers.destroy');
+    });
+});
 require __DIR__ . '/auth.php';
 Route::get('/admin/logout', [AdminController::class, 'Adminlogout'])->name('admin.logout');

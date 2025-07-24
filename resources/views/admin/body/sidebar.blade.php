@@ -79,7 +79,23 @@
                         </ul>
                     </div>
                 </li>
-
+                <li>
+                    <a href="#sidebarSuppliers" data-bs-toggle="collapse">
+                        <i data-feather="home"></i>
+                        <span> Suppliers </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarSuppliers" data-bs-toggle="collapse">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('admin.suppliers.index') }}" class="tp-link">All Suppliers</a>
+                            </li>
+                            <li>
+                                <a href="#" class="tp-link">Add New Supplier</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
 
                 <!-- <li>
                                 <a href="landing.html" target="_blank">
