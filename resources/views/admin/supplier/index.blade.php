@@ -27,24 +27,19 @@
                             <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap">
                                 <thead>
                                         {{-- $table->string('name');
-                                        $table->string('address1');
-                                        $table->string('address2')->nullable();
+                                        $table->string('email')->unique();
+                                        $table->string('type')->default('wacking'); // regular, premium, guest
+                                        $table->string('category')->default('cradit'); // regular, premium, guest
                                         $table->string('phone')->nullable();
-                                        $table->string('email')->nullable();
-                                        $table->string('category')->nullable();
-                                        $table->text('description')->nullable();
-                                        $table->string('website')->nullable();
-                                        $table->string('contact_person')->nullable();
-                                        $table->string('contact_person_phone')->nullable();
-                                        $table->string('city');
-                                        $table->string('state');
-                                        $table->string('country');
-                                        $table->boolean('status')->default(true);
-                                        $table->string('brand')->nullable();
-                                        $table->string('logo')->nullable();
-                                        $table->string('banner_image')->nullable();
-                                        $table->string('supplier_code')->unique(); // Unique code
-                                        $table->string('tax_id')->nullable(); // Optional tax ID --}}
+                                        $table->string('address')->nullable();
+                                        $table->string('city')->nullable();
+                                        $table->string('state')->nullable();
+                                        $table->string('zip')->nullable();
+                                        $table->string('country')->nullable();
+                                        $table->string('social_media_links')->nullable();
+                                        $table->string('profile_picture')->nullable();
+                                        $table->string('status')->default('active'); // active, inactive, banned
+                                        $table->date('DOB')->nullable(); // Date of Birth --}}
                                     <tr>
                                         <th>Name</th>
                                         <th>Category</th>

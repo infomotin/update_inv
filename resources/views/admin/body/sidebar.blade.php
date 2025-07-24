@@ -96,6 +96,23 @@
                         </ul>
                     </div>
                 </li>
+                <li>
+                    <a href="#sidebarCustomer" data-bs-toggle="collapse">
+                        <i data-feather="home"></i>
+                        <span> Customer </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarCustomer" data-bs-toggle="collapse">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('admin.customers.index') }}" class="tp-link">All customer</a>
+                            </li>
+                            <li>
+                                <a href="#" class="tp-link">Add New customer</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
 
                 <!-- <li>
                                 <a href="landing.html" target="_blank">

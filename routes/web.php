@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\WareHouseController;
 use App\Http\Controllers\Backend\SupplierController;
+use App\Http\Controllers\Backend\CustomerController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -59,5 +60,17 @@ Route::middleware('auth')->group(function () {
         Route::delete('/admin/supplier/destroy/{id}', 'AdminSupplierDestroy')->name('admin.suppliers.destroy');
     });
 });
+//CustomerController
+Route::middleware('auth')->group(function () {
+    Route::controller(CustomerController::class)->group(function () {
+        Route::get('/admin/customer/view', 'AdminCustomerView')->name('admin.customers.index');
+        Route::get('/admin/customer/create', 'AdminCustomerCreate')->name('admin.customers.create');
+        Route::post('/admin/customer/store', 'AdminCustomerStore')->name('admin.customers.store');
+        // Route::get('/admin/customer/edit/{id}', 'AdminCustomerEdit')->name('admin.customers.edit');
+        Route::post('/admin/customer/update/{id}', 'AdminCustomerUpdate')->name('admin.customers.update');
+        Route::delete('/admin/customer/destroy/{id}', 'AdminCustomerDestroy')->name('admin.customers.destroy');
+    });
+});
+
 require __DIR__ . '/auth.php';
 Route::get('/admin/logout', [AdminController::class, 'Adminlogout'])->name('admin.logout');
