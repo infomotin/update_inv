@@ -1,18 +1,13 @@
 @extends('admin.admin_master')
 @section('admin')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
     <div class="content">
-
         <!-- Start Content-->
         <div class="container-xxl">
-
             <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                 <div class="flex-grow-1">
                     <h4 class="fs-18 fw-semibold m-0">All Brands</h4>
                 </div>
-
                 <div class="text-end">
                     <ol class="breadcrumb m-0 py-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Brand Management</a></li>
@@ -20,10 +15,6 @@
                     </ol>
                 </div>
             </div>
-
-
-
-            <!-- Button Datatable -->
             <div class="row">
                 <div class="col-8">
                     <div class="card">
@@ -63,11 +54,14 @@
                                             <td>
                                                 <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                                     data-bs-target="#editModal{{ $brand->id }}">Edit</a>
-                                                <form action="#" method="POST" class="d-inline">
+                                                <form action="{{ route('admin.brands.destroy', $brand->id) }}"
+                                                    method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"
-                                                        onclick="return confirm('Are you sure you want to delete this brand?')">Delete</button>
+                                                        onclick="return confirm(
+                                                            'Are you sure you want to delete this brand? This action cannot be undone.'
+                                                        )">Delete</button>
                                                 </form>
                                             </td>
                                             {{-- Create a modal for editing the brand --}}
@@ -84,9 +78,9 @@
                                                         </div>
                                                         <form action="{{ route('admin.brands.update', $brand->id) }}"
                                                             method="POST" enctype="multipart/form-data">
-                                                             @csrf
+                                                            @csrf
                                                             <input type="hidden" name="old_image"
-                                                                value="{{ $brand->brand_image }}">  {{-- Store old image path --}}
+                                                                value="{{ $brand->brand_image }}"> {{-- Store old image path --}}
                                                             <div class="modal-body">
                                                                 <div class="mb-3">
                                                                     <label for="brand_name" class="form-label">Brand
@@ -113,8 +107,7 @@
                                                                     <textarea name="brand_description" class="form-control" id="brand_description">{{ $brand->brand_description }}</textarea>
                                                                 </div>
                                                                 <div class="mb-3">
-                                                                    <label for="status"
-                                                                        class="form-label">Status</label>
+                                                                    <label for="status" class="form-label">Status</label>
                                                                     <select name="status" id="status"
                                                                         class="form-control">
                                                                         <option value="1"
@@ -176,48 +169,6 @@
                     </div>
                 </div>
 
-                {{-- <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="editModalLabel">Edit Brand</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <form id="editForm" action="#" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                @method('PUT')
-                                <div class="modal-body">
-                                    <div class="mb-3">
-                                        <label for="edit_brand_name" class="form-label">Brand Name</label>
-                                        <input type="text" name="brand_name" class="form-control" id="edit_brand_name" value="">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="edit_brand_image" class="form-label">Brand Image</label>
-                                        <input type="file" name="brand_image" class="form-control" id="edit_brand_image" value="">
-                                    </div>
-                                    <div class="mb-3">
-                                        <img id="editImagePreview" src="#" alt="Image Preview" style="display: none; max-width: 100%;" >
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="edit_brand_description" class="form-label">Description</label>
-                                        <textarea name="brand_description" class="form-control" id="edit_brand_description"> </textarea>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="edit_status" class="form-label">Status</label>
-                                        <select name="status" id="edit_status" class="form-control">
-                                            <option value="1">Active</option>
-                                            <option value="0">Inactive</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div> --}}
 
             </div>
         </div> <!-- container-fluid -->

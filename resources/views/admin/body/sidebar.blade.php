@@ -62,6 +62,23 @@
                         </ul>
                     </div>
                 </li>
+                <li>
+                    <a href="#sidebarWarehouses" data-bs-toggle="collapse">
+                        <i data-feather="home"></i>
+                        <span> Ware Houses </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarWarehouses" data-bs-toggle="collapse">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('admin.warehouses.index') }}" class="tp-link">All Ware Houses</a>
+                            </li>
+                            <li>
+                                <a href="#" class="tp-link">Add New Ware House</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
 
 
                 <!-- <li>

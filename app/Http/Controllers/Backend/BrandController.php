@@ -115,5 +115,18 @@ class BrandController extends Controller
 
         return redirect()->route('admin.brands.index')->with('success', 'Brand updated successfully.');
     }
+    //AdminBrandDestroy
+    public function AdminBrandDestroy($id)
+    {
+        $brand = Brand::findOrFail($id);
+        // Delete the brand image if it exists
+        if ($brand->brand_image && file_exists(public_path($brand->brand_image))) {
+            unlink(public_path($brand->brand_image));
+        }
+
+        $brand->delete();
+
+        return redirect()->route('admin.brands.index')->with('success', 'Brand deleted successfully.');
+    }
 
 }
