@@ -53,4 +53,11 @@ class UnitController extends Controller
         $unit->update($request->all());
         return redirect()->route('admin.units.index')->with('success', 'Unit updated successfully.');
     }
+    //AdminUnitDestroy
+    public function AdminUnitDestroy($id)
+    {
+        $unit = Unit::findOrFail($id);
+        $unit->delete();
+        return redirect()->route('admin.units.index')->with('success', 'Unit deleted successfully.');
+    }
 }

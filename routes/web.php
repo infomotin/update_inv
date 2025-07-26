@@ -10,6 +10,8 @@ use App\Http\Controllers\Backend\SupplierController;
 use App\Http\Controllers\Backend\CustomerController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\UnitController;
+use App\Http\Controllers\Backend\SizeController;
+use App\Http\Controllers\Backend\ColorController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -96,5 +98,28 @@ Route::middleware('auth')->group(function () {
         Route::delete('/admin/unit/destroy/{id}', 'AdminUnitDestroy')->name('admin.units.destroy');
     });
 });
+//SizeController
+Route::middleware('auth')->group(function () {
+    Route::controller(SizeController::class)->group(function () {
+        Route::get('/admin/size/view', 'AdminSizeView')->name('admin.sizes.index');
+        Route::get('/admin/size/create', 'AdminSizeCreate')->name('admin.sizes.create');
+        Route::post('/admin/size/store', 'AdminSizeStore')->name('admin.sizes.store');
+        // Route::get('/admin/size/edit/{id}', 'AdminSizeEdit')->name('admin.sizes.edit');
+        Route::post('/admin/size/update/{id}', 'AdminSizeUpdate')->name('admin.sizes.update');
+        Route::delete('/admin/size/destroy/{id}', 'AdminSizeDestroy')->name('admin.sizes.destroy');
+    });
+});
+//ColorController
+Route::middleware('auth')->group(function () {
+    Route::controller(ColorController::class)->group(function () {
+        Route::get('/admin/color/view', 'AdminColorView')->name('admin.colors.index');
+        Route::get('/admin/color/create', 'AdminColorCreate')->name('admin.colors.create');
+        Route::post('/admin/color/store', 'AdminColorStore')->name('admin.colors.store');
+        // Route::get('/admin/color/edit/{id}', 'AdminColorEdit')->name('admin.colors.edit');
+        Route::post('/admin/color/update/{id}', 'AdminColorUpdate')->name('admin.colors.update');
+        Route::delete('/admin/color/destroy/{id}', 'AdminColorDestroy')->name('admin.colors.destroy');
+    });
+});
+
 require __DIR__ . '/auth.php';
 Route::get('/admin/logout', [AdminController::class, 'Adminlogout'])->name('admin.logout');

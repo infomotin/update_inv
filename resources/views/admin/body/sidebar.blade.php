@@ -163,6 +163,8 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('admin.units.index') }}" class="tp-link">Unit Management</a>
+                                <a href="{{ route('admin.colors.index') }}" class="tp-link">Color Management</a>
+                                <a href="{{ route('admin.sizes.index') }}" class="tp-link">Size Management</a>
                             </li>
 
                         </ul>
