@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\WareHouseController;
 use App\Http\Controllers\Backend\SupplierController;
 use App\Http\Controllers\Backend\CustomerController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\UnitController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -81,6 +82,18 @@ Route::middleware('auth')->group(function () {
         // Route::get('/admin/category/edit/{id}', 'AdminCategoryEdit')->name('admin.categories.edit');
         Route::post('/admin/category/update/{id}', 'AdminCategoryUpdate')->name('admin.categories.update');
         Route::delete('/admin/category/destroy/{id}', 'AdminCategoryDestroy')->name('admin.categories.destroy');
+    });
+});
+
+//UnitController
+Route::middleware('auth')->group(function () {
+    Route::controller(UnitController::class)->group(function () {
+        Route::get('/admin/unit/view', 'AdminUnitView')->name('admin.units.index');
+        Route::get('/admin/unit/create', 'AdminUnitCreate')->name('admin.units.create');
+        Route::post('/admin/unit/store', 'AdminUnitStore')->name('admin.units.store');
+        // Route::get('/admin/unit/edit/{id}', 'AdminUnitEdit')->name('admin.units.edit');
+        Route::post('/admin/unit/update/{id}', 'AdminUnitUpdate')->name('admin.units.update');
+        Route::delete('/admin/unit/destroy/{id}', 'AdminUnitDestroy')->name('admin.units.destroy');
     });
 });
 require __DIR__ . '/auth.php';

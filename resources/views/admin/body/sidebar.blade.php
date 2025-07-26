@@ -151,18 +151,18 @@
                 </li>
 
 
-                <li class="menu-title mt-2">General</li>
+                <li class="menu-title mt-2">General Setup</li>
 
                 <li>
                     <a href="#sidebarBaseui" data-bs-toggle="collapse">
                         <i data-feather="package"></i>
-                        <span> Components </span>
+                        <span> Base Setup </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarBaseui">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="ui-accordions.html" class="tp-link">Accordions</a>
+                                <a href="{{ route('admin.units.index') }}" class="tp-link">Unit Management</a>
                             </li>
 
                         </ul>
