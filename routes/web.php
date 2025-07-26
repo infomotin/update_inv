@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\WareHouseController;
 use App\Http\Controllers\Backend\SupplierController;
 use App\Http\Controllers\Backend\CustomerController;
+use App\Http\Controllers\Backend\CategoryController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -71,6 +72,16 @@ Route::middleware('auth')->group(function () {
         Route::delete('/admin/customer/destroy/{id}', 'AdminCustomerDestroy')->name('admin.customers.destroy');
     });
 });
-
+//CategoryController
+Route::middleware('auth')->group(function () {
+    Route::controller(CategoryController::class)->group(function () {
+        Route::get('/admin/category/view', 'AdminCategoryView')->name('admin.categories.index');
+        Route::get('/admin/category/create', 'AdminCategoryCreate')->name('admin.categories.create');
+        Route::post('/admin/category/store', 'AdminCategoryStore')->name('admin.categories.store');
+        // Route::get('/admin/category/edit/{id}', 'AdminCategoryEdit')->name('admin.categories.edit');
+        Route::post('/admin/category/update/{id}', 'AdminCategoryUpdate')->name('admin.categories.update');
+        Route::delete('/admin/category/destroy/{id}', 'AdminCategoryDestroy')->name('admin.categories.destroy');
+    });
+});
 require __DIR__ . '/auth.php';
 Route::get('/admin/logout', [AdminController::class, 'Adminlogout'])->name('admin.logout');

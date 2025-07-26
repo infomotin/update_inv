@@ -113,13 +113,24 @@
                         </ul>
                     </div>
                 </li>
+                <li>
+                    <a href="#sidebarCategory" data-bs-toggle="collapse">
+                        <i data-feather="home"></i>
+                        <span> Category </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarCategory" data-bs-toggle="collapse">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('admin.categories.index') }}" class="tp-link">All Category</a>
+                            </li>
+                            <li>
+                                <a href="#" class="tp-link">Add New Category</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
 
-                <!-- <li>
-                                <a href="landing.html" target="_blank">
-                                    <i data-feather="globe"></i>
-                                    <span> Landing </span>
-                                </a>
-                            </li> -->
 
                 <li class="menu-title">Pages</li>
 
