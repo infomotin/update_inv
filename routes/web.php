@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\UnitController;
 use App\Http\Controllers\Backend\SizeController;
 use App\Http\Controllers\Backend\ColorController;
+use App\Http\Controllers\Backend\ProductController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -118,6 +119,18 @@ Route::middleware('auth')->group(function () {
         // Route::get('/admin/color/edit/{id}', 'AdminColorEdit')->name('admin.colors.edit');
         Route::post('/admin/color/update/{id}', 'AdminColorUpdate')->name('admin.colors.update');
         Route::delete('/admin/color/destroy/{id}', 'AdminColorDestroy')->name('admin.colors.destroy');
+    });
+});
+
+//ProductController
+Route::middleware('auth')->group(function () {
+    Route::controller(ProductController::class)->group(function () {
+        Route::get('/admin/product/view', 'AdminProductView')->name('admin.products.index');
+        Route::get('/admin/product/create', 'AdminProductCreate')->name('admin.products.create');
+        Route::post('/admin/product/store', 'AdminProductStore')->name('admin.products.store');
+        Route::get('/admin/product/edit/{id}', 'AdminProductEdit')->name('admin.products.edit');
+        Route::post('/admin/product/update/{id}', 'AdminProductUpdate')->name('admin.products.update');
+        Route::delete('/admin/product/destroy/{id}', 'AdminProductDestroy')->name('admin.products.destroy');
     });
 });
 

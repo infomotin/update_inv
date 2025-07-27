@@ -45,107 +45,29 @@
                     </div>
                 </li>
 
-                <li>
-                    <a href="#sidebarBrands" data-bs-toggle="collapse">
-                        <i data-feather="home"></i>
-                        <span> Brands Management </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarBrands" data-bs-toggle="collapse">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('admin.brands.index') }}" class="tp-link">All Brands</a>
-                            </li>
-                            <li>
-                                <a href="#" class="tp-link">Add New Brand</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a href="#sidebarWarehouses" data-bs-toggle="collapse">
-                        <i data-feather="home"></i>
-                        <span> Ware Houses </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarWarehouses" data-bs-toggle="collapse">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('admin.warehouses.index') }}" class="tp-link">All Ware Houses</a>
-                            </li>
-                            <li>
-                                <a href="#" class="tp-link">Add New Ware House</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a href="#sidebarSuppliers" data-bs-toggle="collapse">
-                        <i data-feather="home"></i>
-                        <span> Suppliers </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarSuppliers" data-bs-toggle="collapse">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('admin.suppliers.index') }}" class="tp-link">All Suppliers</a>
-                            </li>
-                            <li>
-                                <a href="#" class="tp-link">Add New Supplier</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a href="#sidebarCustomer" data-bs-toggle="collapse">
-                        <i data-feather="home"></i>
-                        <span> Customer </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarCustomer" data-bs-toggle="collapse">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('admin.customers.index') }}" class="tp-link">All customer</a>
-                            </li>
-                            <li>
-                                <a href="#" class="tp-link">Add New customer</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a href="#sidebarCategory" data-bs-toggle="collapse">
-                        <i data-feather="home"></i>
-                        <span> Category </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarCategory" data-bs-toggle="collapse">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('admin.categories.index') }}" class="tp-link">All Category</a>
-                            </li>
-                            <li>
-                                <a href="#" class="tp-link">Add New Category</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
 
 
-                <li class="menu-title">Pages</li>
+
+
+
+
+
+                <li class="menu-title">Product Management</li>
 
                 <li>
                     <a href="#sidebarAuth" data-bs-toggle="collapse">
                         <i data-feather="users"></i>
-                        <span> Authentication </span>
+                        <span> Product </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarAuth">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="auth-login.html" class="tp-link">Log In</a>
+                                <a href="{{ route('admin.products.index') }}" class="tp-link">Product List</a>
                             </li>
-
+                            <li>
+                                <a href="{{ route('admin.products.create') }}" class="tp-link">Add New Product</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -162,6 +84,11 @@
                     <div class="collapse" id="sidebarBaseui">
                         <ul class="nav-second-level">
                             <li>
+                                <a href="{{ route('admin.categories.index') }}" class="tp-link">All Category</a>
+                                <a href="{{ route('admin.customers.index') }}" class="tp-link">All customer</a>
+                                <a href="{{ route('admin.suppliers.index') }}" class="tp-link">All Suppliers</a>
+                                <a href="{{ route('admin.warehouses.index') }}" class="tp-link">All Ware Houses</a>
+                                <a href="{{ route('admin.brands.index') }}" class="tp-link">Brands Management</a>
                                 <a href="{{ route('admin.units.index') }}" class="tp-link">Unit Management</a>
                                 <a href="{{ route('admin.colors.index') }}" class="tp-link">Color Management</a>
                                 <a href="{{ route('admin.sizes.index') }}" class="tp-link">Size Management</a>
