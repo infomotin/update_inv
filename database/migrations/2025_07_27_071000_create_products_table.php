@@ -25,8 +25,6 @@ return new class extends Migration
             $table->unsignedBigInteger('warehouse_id')->nullable();
             $table->unsignedBigInteger('supplier_id')->nullable();
             $table->unsignedBigInteger('unit_id')->nullable();
-            $table->unsignedBigInteger('size_id')->nullable();
-            $table->unsignedBigInteger('color_id')->nullable();
             $table->integer('quantity')->default(0);
             $table->boolean('status')->default(true);
             $table->boolean('featured')->default(false);
@@ -39,8 +37,7 @@ return new class extends Migration
             $table->foreign('warehouse_id')->references('id')->on('ware_houses')->onDelete('cascade');
             $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
-            $table->foreign('size_id')->references('id')->on('sizes')->onDelete('cascade');
-            $table->foreign('color_id')->references('id')->on('colors')->onDelete('cascade');
+            
 
             $table->timestamps();
         });

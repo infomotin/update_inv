@@ -70,6 +70,7 @@
                                         <th>Quantity</th>
                                         <th>Status</th>
                                         <th>Featured</th>
+                                        <th>Add Variant</th>
                                         <th>Active</th>
                                         <th>Actions</th>
                                     </tr>
@@ -98,6 +99,9 @@
                                             <td>{{ $item->quantity }}</td>
                                             <td>{{ $item->status ? 'Active' : 'Inactive' }}</td>
                                             <td>{{ $item->featured ? 'Yes' : 'No' }}</td>
+                                            <td>
+                                            <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#productDetailsModal{{ $item->id }}">Add Details</a>
+                                            </td>
                                             <td>{{ ucfirst($item->active) }}</td>
                                             <td>
                                                 <!-- Add action buttons here -->
@@ -105,6 +109,65 @@
                                                 <a href="#" class="btn btn-danger btn-sm">Delete</a>
                                             </td>
                                         </tr>
+
+                                        <!-- Product Details Modal -->
+                                        <div class="modal fade" id="productDetailsModal{{ $item->id }}" tabindex="-1" aria-labelledby="productDetailsModalLabel{{ $item->id }}" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="productDetailsModalLabel{{ $item->id }}">Product Details</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                    <!-- $table->unsignedBigInteger('product_id'); -->
+                                                        <!-- $table->string('name')->nullable();
+                                                        $table->string('sku')->unique()->nullable();
+                                                        $table->decimal('price', 8, 2)->nullable();
+                                                        $table->decimal('discount', 8, 2)->nullable();
+                                                        $table->integer('quantity')->default(0);
+                                                        $table->boolean('status')->default(true);
+                                                        $table->boolean('featured')->default(false);
+                                                        //size and color and barcode and image 
+                                                        $table->unsignedBigInteger('size_id')->nullable();
+                                                        $table->unsignedBigInteger('color_id')->nullable();
+                                                        $table->string('barcode')->nullable();
+                                                        $table->json('image')->nullable();
+
+                                                        // Foreign key constraints
+                                                        $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+                                                        $table->foreign('size_id')->references('id')->on('sizes')->onDelete('cascade');
+                                                        $table->foreign('color_id')->references('id')->on('colors')->onDelete('cascade'); -->
+                                                        <!-- Add product multi variant details form here -->
+                                                         <!-- make this modal dynamic with product id multiple variant add form with upper details table colume name  -->
+                                                          <form action="#" method="POST">
+                                                            @csrf
+                                                            <input type="hidden" name="product_id" value="{{ $item->id }}">
+                                                            <div class="form-group">
+                                                                <label for="name">Name</label>
+                                                                <input type="text" class="form-control" name="name" required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="sku">SKU</label>
+                                                                <input type="text" class="form-control" name="sku" required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="price">Price</label>
+                                                                <input type="number" class="form-control" name="price" step="0.01" required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="quantity">Quantity</label>
+                                                                <input type="number" class="form-control" name="quantity" required>
+                                                            </div>
+                                                            <button type="submit" class="btn btn-primary">Add Variant</button>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Product Details Modal -->
+
                                     @endforeach
                                 </tbody>
                             </table>

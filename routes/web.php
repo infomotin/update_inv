@@ -131,6 +131,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/admin/product/edit/{id}', 'AdminProductEdit')->name('admin.products.edit');
         Route::post('/admin/product/update/{id}', 'AdminProductUpdate')->name('admin.products.update');
         Route::delete('/admin/product/destroy/{id}', 'AdminProductDestroy')->name('admin.products.destroy');
+        Route::post('/admin/product/details/store/{id}', 'AdminProductDetailsStore')->name('admin.product.details.store');
     });
 });
 

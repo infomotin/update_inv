@@ -12,6 +12,8 @@ use App\Models\Supplier;
 use App\Models\Unit;
 use App\Models\Size;
 use App\Models\Color;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -80,8 +82,14 @@ class ProductController extends Controller
         if($validatedData == null){
             return redirect()->route('admin.products.create')->with('error', 'Product not created successfully.');
         }
-
-        Product::create($validatedData);
+        DB::beginTransaction();
+        try {
+            $product = Product::create($validatedData);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('admin.products.create')->with('error', 'Product not created successfully.');
+        }   
 
         return redirect()->route('admin.products.create')->with('success', 'Product created successfully.');
     }
@@ -97,6 +105,29 @@ class ProductController extends Controller
         $sizes = Size::all();
         $colors = Color::all();
         return view('admin.product.edit', compact('product', 'categories', 'brands', 'warehouses', 'suppliers', 'units', 'sizes', 'colors'));
+    }
+    //AdminProductDetailsStore
+    public function AdminProductDetailsStore(Request $request, $id)
+    {
+        // dd($request->all());
+        $product = Product::findOrFail($id);
+        // dd($product);
+        $validatedData = $request->validate([
+            'supplier_id' => 'required|exists:suppliers,id',
+            'warehouse_id' => 'required|exists:ware_houses,id',
+        ]);
+        if($validatedData == null){
+            return redirect()->route('admin.products.index')->with('error', 'Product not updated successfully.');
+        }
+        DB::beginTransaction();
+        try {
+            $product->details()->updateOrCreate(['product_id' => $id], $validatedData);
+            DB::commit();   
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('admin.products.index')->with('error', 'Product not updated successfully.');
+        }   
+        return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
     }
 
 }

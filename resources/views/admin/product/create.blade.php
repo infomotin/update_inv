@@ -148,8 +148,8 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    {{-- <form action="{{ route('admin.product.store', $product->id) }}" method="POST" enctype="multipart/form-data"> --}}
-                                                        <form action="#" method="POST" enctype="multipart/form-data">
+                                                    
+                                                        <form action="{{ route('admin.product.details.store', $product->id) }}" method="POST" enctype="multipart/form-data">
                                                         @csrf
                                                         <input type="text" hidden name="product_id" value="{{ $product->id }}">
                                                         <div class="mb-3">
