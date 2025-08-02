@@ -38,8 +38,7 @@
                                         $table->unsignedBigInteger('warehouse_id')->nullable();
                                         $table->unsignedBigInteger('supplier_id')->nullable();
                                         $table->unsignedBigInteger('unit_id')->nullable();
-                                        $table->unsignedBigInteger('size_id')->nullable();
-                                        $table->unsignedBigInteger('color_id')->nullable();
+                                    
                                         $table->integer('quantity')->default(0);
                                         $table->boolean('status')->default(true);
                                         $table->boolean('featured')->default(false);
@@ -52,11 +51,9 @@
                                         $table->foreign('warehouse_id')->references('id')->on('ware_houses')->onDelete('cascade');
                                         $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
                                         $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
-                                        $table->foreign('size_id')->references('id')->on('sizes')->onDelete('cascade');
-                                        $table->foreign('color_id')->references('id')->on('colors')->onDelete('cascade'); --}}
+                                 --}}
                                     <tr>
                                         <th>Name</th>
-
                                         <th>Image</th>
                                         <th>Price</th>
                                         <th>Discount</th>
@@ -65,8 +62,6 @@
                                         <th>Warehouse</th>
                                         <th>Supplier</th>
                                         <th>Unit</th>
-                                        <th>Size</th>
-                                        <th>Color</th>
                                         <th>Quantity</th>
                                         <th>Status</th>
                                         <th>Featured</th>
@@ -94,13 +89,14 @@
                                             <td>{{ $item->warehouse ? $item->warehouse->name : 'N/A' }}</td>
                                             <td>{{ $item->supplier ? $item->supplier->name : 'N/A' }}</td>
                                             <td>{{ $item->unit ? $item->unit->name : 'N/A' }}</td>
-                                            <td>{{ $item->size ? $item->size->name : 'N/A' }}</td>
-                                            <td>{{ $item->color ? $item->color->name : 'N/A' }}</td>
+
                                             <td>{{ $item->quantity }}</td>
                                             <td>{{ $item->status ? 'Active' : 'Inactive' }}</td>
                                             <td>{{ $item->featured ? 'Yes' : 'No' }}</td>
                                             <td>
-                                            <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#productDetailsModal{{ $item->id }}">Add Details</a>
+                                                <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                                    data-bs-target="#productDetailsModal{{ $item->id }}">Add
+                                                    Details</a>
                                             </td>
                                             <td>{{ ucfirst($item->active) }}</td>
                                             <td>
@@ -111,63 +107,107 @@
                                         </tr>
 
                                         <!-- Product Details Modal -->
-                                        <div class="modal fade" id="productDetailsModal{{ $item->id }}" tabindex="-1" aria-labelledby="productDetailsModalLabel{{ $item->id }}" aria-hidden="true">
+                                        <div class="modal fade" id="productDetailsModal{{ $item->id }}" tabindex="-1"
+                                            aria-labelledby="productDetailsModalLabel{{ $item->id }}"
+                                            aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="productDetailsModalLabel{{ $item->id }}">Product Details</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        <h5 class="modal-title"
+                                                            id="productDetailsModalLabel{{ $item->id }}">Product
+                                                            Details</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                    <!-- $table->unsignedBigInteger('product_id'); -->
+                                                        <!-- $table->unsignedBigInteger('product_id'); -->
                                                         <!-- $table->string('name')->nullable();
-                                                        $table->string('sku')->unique()->nullable();
-                                                        $table->decimal('price', 8, 2)->nullable();
-                                                        $table->decimal('discount', 8, 2)->nullable();
-                                                        $table->integer('quantity')->default(0);
-                                                        $table->boolean('status')->default(true);
-                                                        $table->boolean('featured')->default(false);
-                                                        //size and color and barcode and image 
-                                                        $table->unsignedBigInteger('size_id')->nullable();
-                                                        $table->unsignedBigInteger('color_id')->nullable();
-                                                        $table->string('barcode')->nullable();
-                                                        $table->json('image')->nullable();
+                                                                        $table->string('sku')->unique()->nullable();
+                                                                        $table->decimal('price', 8, 2)->nullable();
+                                                                        $table->decimal('discount', 8, 2)->nullable();
+                                                                        $table->integer('quantity')->default(0);
+                                                                        $table->boolean('status')->default(true);
+                                                                        $table->boolean('featured')->default(false);
+                                                                        //size and color and barcode and image
+                                                                        $table->unsignedBigInteger('size_id')->nullable();
+                                                                        $table->unsignedBigInteger('color_id')->nullable();
+                                                                        $table->string('barcode')->nullable();
+                                                                        $table->json('image')->nullable();
+                                                                        // Foreign key constraints
+                                                                        $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+                                                                        $table->foreign('size_id')->references('id')->on('sizes')->onDelete('cascade');
+                                                                        $table->foreign('color_id')->references('id')->on('colors')->onDelete('cascade'); -->
+                                                        <!-- make this modal dynamic with product id multiple variant add form with upper details table colume name  -->
+                                                        <div class="modal-body">
+                                                            <form action="{{ route('admin.product.variant.store', $item->id) }}" method="POST">
+                                                                @csrf
+                                                                <input type="hidden" name="product_id"
+                                                                    value="{{ $item->id }}">
+                                                                <div class="form-group">
+                                                                    <label for="name">Name</label>
+                                                                    <input type="text" class="form-control"
+                                                                        name="name" required>
+                                                                </div>
+                                                                <div class="form-group row" style="margin-top: 10px;"
+                                                                    id="variantForm">
+                                                                    
+                                                                    <div class="form-group">
+                                                                        <label for="price">Price</label>
+                                                                        <input type="number" class="form-control"
+                                                                            name="price[]" step="0.01" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="quantity">Quantity</label>
+                                                                        <input type="number" class="form-control"
+                                                                            name="quantity[]" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="size">Size</label>
+                                                                        <select class="form-control" name="size[]"
+                                                                            required>
+                                                                            <option value="">Select Size</option>
+                                                                            @foreach ($sizes as $size)
+                                                                                <option value="{{ $size->id }}">
+                                                                                    {{ $size->size_name }}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="color">Color</label>
+                                                                        <select class="form-control" name="color[]"
+                                                                            required>
+                                                                            <option value="">Select Color</option>
+                                                                            @foreach ($colors as $color)
+                                                                                <option value="{{ $color->id }}">
+                                                                                    {{ $color->color_name }}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                {{-- //add or remove button for variant form --}}
+                                                                <div class="add_item">
+                                                                    <button type="button"
+                                                                        class="btn btn-success addeventmore">Add
+                                                                        More Variant</button>
+                                                                    <button type="button"
+                                                                        class="btn btn-danger removeeventmore">Remove
+                                                                        Variant</button>
+                                                                </div>
+                                                                <div>
+                                                                    <button type="submit" class="btn btn-primary">Add
+                                                                        Variant</button>
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">Close</button>
+                                                                </div>
+                                                        </div>
 
-                                                        // Foreign key constraints
-                                                        $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-                                                        $table->foreign('size_id')->references('id')->on('sizes')->onDelete('cascade');
-                                                        $table->foreign('color_id')->references('id')->on('colors')->onDelete('cascade'); -->
-                                                        <!-- Add product multi variant details form here -->
-                                                         <!-- make this modal dynamic with product id multiple variant add form with upper details table colume name  -->
-                                                          <form action="#" method="POST">
-                                                            @csrf
-                                                            <input type="hidden" name="product_id" value="{{ $item->id }}">
-                                                            <div class="form-group">
-                                                                <label for="name">Name</label>
-                                                                <input type="text" class="form-control" name="name" required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="sku">SKU</label>
-                                                                <input type="text" class="form-control" name="sku" required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="price">Price</label>
-                                                                <input type="number" class="form-control" name="price" step="0.01" required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="quantity">Quantity</label>
-                                                                <input type="number" class="form-control" name="quantity" required>
-                                                            </div>
-                                                            <button type="submit" class="btn btn-primary">Add Variant</button>
+                                                        </form>
                                                     </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- End Product Details Modal -->
-
                                     @endforeach
                                 </tbody>
                             </table>
@@ -176,12 +216,28 @@
                 </div>
 
 
-
+                <!-- End Product Details Modal -->
             </div>
         </div> <!-- container-fluid -->
 
     </div>
     <!-- End Content-->
+    <!----For Section-------->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var counter = 0;
+            $(document).on("click", ".addeventmore", function() {
+                var whole_extra_item_add = $("#variantForm").html();
+                $(this).closest(".add_item").append(whole_extra_item_add);
+                counter++;
+            });
+            $(document).on("click", ".removeeventmore", function(event) {
+                $(this).closest("#whole_extra_item_delete").remove();
+                counter -= 1
+            });
+        });
+    </script>
+
     <script>
         $(document).ready(function() {
             $('#brand_image').change(function() {

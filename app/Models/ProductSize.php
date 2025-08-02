@@ -11,16 +11,10 @@ class ProductSize extends Model
     /**
      * Get the product that owns the size.
      */
-    public function product()
-    {
-        return $this->belongsTo(Product::class);
-    }
+
 
     /**
      * Get the color associated with the product size.
      */
-    public function color()
-    {
-        return $this->belongsTo(ProductColor::class, 'color_id');
-    }
+ 
 }

@@ -105,7 +105,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/admin/size/view', 'AdminSizeView')->name('admin.sizes.index');
         Route::get('/admin/size/create', 'AdminSizeCreate')->name('admin.sizes.create');
         Route::post('/admin/size/store', 'AdminSizeStore')->name('admin.sizes.store');
-        // Route::get('/admin/size/edit/{id}', 'AdminSizeEdit')->name('admin.sizes.edit');
+        Route::get('/admin/size/edit/{id}', 'AdminSizeEdit')->name('admin.sizes.edit');
         Route::post('/admin/size/update/{id}', 'AdminSizeUpdate')->name('admin.sizes.update');
         Route::delete('/admin/size/destroy/{id}', 'AdminSizeDestroy')->name('admin.sizes.destroy');
     });
@@ -132,6 +132,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/admin/product/update/{id}', 'AdminProductUpdate')->name('admin.products.update');
         Route::delete('/admin/product/destroy/{id}', 'AdminProductDestroy')->name('admin.products.destroy');
         Route::post('/admin/product/details/store/{id}', 'AdminProductDetailsStore')->name('admin.product.details.store');
+        Route::post('/admin/product/variant/store/{id}', 'AdminProductVariantStore')->name('admin.product.variant.store');
     });
 });
 

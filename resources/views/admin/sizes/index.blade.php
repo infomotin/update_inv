@@ -26,7 +26,7 @@
                         <div class="card-body">
                             <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap">
                                 <thead>
-                                   {{-- $table->string('size_name')->unique();
+                                    {{-- $table->string('size_name')->unique();
                                         $table->string('description')->nullable();
                                         $table->boolean('is_active')->default(true);
                                         $table->string('size_group')->default(false);
@@ -39,26 +39,26 @@
                                         <th>Size Name</th>
                                         <th>Description</th>
                                         <th>Active Status</th>
-                                        <th>Base Size</th>
-                                        <th>Conversion Value</th>
+
+                                        <th>Size Rank</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
                                     @foreach ($sizes as $item)
-
                                         <tr>
                                             <td>{{ $item->size_name }}</td>
                                             <td>{{ $item->description }}</td>
                                             <td>{{ $item->is_active ? 'Active' : 'Inactive' }}</td>
-                                            <td>{{ $item->is_base_size ? 'Yes' : 'No' }}</td>
-                                            <td>{{ $item->conversion_value }}</td>
+
+                                            <td>{{ $item->size_rank }}</td>
                                             <td>
                                                 <a href="{{ route('admin.sizes.edit', $item->id) }}"
-                                                    class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $item->id }}">Edit</a>
-                                                <form action="{{ route('admin.sizes.destroy', $item->id) }}"
-                                                    method="POST" style="display:inline;">
+                                                    class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                                    data-bs-target="#editModal{{ $item->id }}">Edit</a>
+                                                <form action="{{ route('admin.sizes.destroy', $item->id) }}" method="POST"
+                                                    style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger">Delete</button>
@@ -71,7 +71,8 @@
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="editModalLabel{{ $item->id }}">Edit Size</h5>
+                                                        <h5 class="modal-title" id="editModalLabel{{ $item->id }}">Edit
+                                                            Size</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
@@ -84,11 +85,13 @@
                                                             <div class="mb-3">
                                                                 <label for="size_name" class="form-label">Size Name</label>
                                                                 <input type="text" class="form-control" id="size_name"
-                                                                    name="size_name" value="{{ $item->size_name }}" required>
+                                                                    name="size_name" value="{{ $item->size_name }}"
+                                                                    required>
                                                             </div>
 
                                                             <div class="mb-3">
-                                                                <label for="description" class="form-label">Description</label>
+                                                                <label for="description"
+                                                                    class="form-label">Description</label>
                                                                 <textarea class="form-control" id="description" name="description">{{ $item->description }}</textarea>
                                                             </div>
 
@@ -96,16 +99,22 @@
                                                                 <input type="checkbox" class="form-check-input"
                                                                     id="is_active" name="is_active"
                                                                     {{ $item->is_active ? 'checked' : '' }}>
-                                                                <label class="form-check-label" for="is_active">Is Active</label>
+                                                                <label class="form-check-label" for="is_active">Is
+                                                                    Active</label>
                                                             </div>
-
-                                                            <button type="submit" class="btn btn-primary">Update Size</button>
+                                                            <div class="mb-3">
+                                                                <label for="size_rank" class="form-label">Size Rank</label>
+                                                                <input type="number" class="form-control" id="size_rank"
+                                                                    name="size_rank" value="{{ $item->size_rank }}"
+                                                                    required>
+                                                            </div>
+                                                            <button type="submit" class="btn btn-primary">Update
+                                                                Size</button>
                                                         </form>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
                                     @endforeach
                                 </tbody>
                             </table>
@@ -119,8 +128,7 @@
                             <h5 class="card-title">Add New Size</h5>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('admin.sizes.store') }}" method="POST"
-                                enctype="multipart/form-data">
+                            <form action="{{ route('admin.sizes.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="mb-3">
                                     <label for="size_name" class="form-label">Size Name</label>
@@ -137,14 +145,11 @@
                                     <label class="form-check-label" for="is_active">Is Active</label>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="is_base_size" class="form-label">Is Base Size</label>
-                                    <input type="checkbox" class="form-check-input" id="is_base_size" name="is_base_size">
-                                    <label class="form-check-label" for="is_base_size">Is Base Size</label>
+                                    <label for="size_rank" class="form-label">Size Rank</label>
+                                    <input type="number" class="form-control" id="size_rank" name="size_rank"
+                                        step="0.01" value="0.00">
                                 </div>
-                                <div class="mb-3">
-                                    <label for="conversion_value" class="form-label">Conversion Value</label>
-                                    <input type="number" class="form-control" id="conversion_value" name="conversion_value" step="0.01" value="0.00">
-                                </div>
+
 
                                 <button type="submit" class="btn btn-primary">Add New Size</button>
                             </form>

@@ -16,13 +16,7 @@ return new class extends Migration
             $table->string('size_name')->unique();
             $table->string('description')->nullable();
             $table->boolean('is_active')->default(true);
-            $table->string('size_group')->default(false);
-            $table->unsignedBigInteger('unit_id')->nullable();
-            $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
-
-            $table->string('symbol')->nullable(); // Optional symbol for size
-            $table->boolean('is_base_size')->default(false); // Indicates if this is a base size
-            $table->double('conversion_value', 8, 2)->default(0.00); // Conversion value for size
+            $table->double('size_rank', 8, 2)->default(0.00); 
             $table->timestamps();
         });
     }
