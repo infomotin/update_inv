@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;;
+//model
+use App\Models\User;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\BrandController;
@@ -13,9 +15,16 @@ use App\Http\Controllers\Backend\UnitController;
 use App\Http\Controllers\Backend\SizeController;
 use App\Http\Controllers\Backend\ColorController;
 use App\Http\Controllers\Backend\ProductController;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 Route::get('/', function () {
-    return view('welcome');
+    // dd(Auth::user());
+    $user = User::first();
+    // dd($user->histories());
+    $user->update([
+        'name' => Str::random(10),
+    ]);
+    // return view('welcome');  
 });
 Route::get('/dashboard', function () {
     return view('admin.index');

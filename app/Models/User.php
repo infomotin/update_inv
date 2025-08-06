@@ -6,12 +6,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+//trait
+use App\History\Traits\Historyable;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
-
+    use Historyable;
     /**
      * The attributes that are mass assignable.
      *
@@ -22,6 +24,19 @@ class User extends Authenticatable
     //     'email',
     //     'password',
     // ];
+
+    // public static function boot()
+    // {
+    //     parent::boot();
+    //     static::updated(function ($model) {
+    //         dd($model);
+    //         // $model->histories()->create([
+    //         //     'change_column' => $model->getChanges(),
+    //         //     'changed_value_from' => $model->getOriginal(),
+    //         //     'changed_value_to' => $model->getAttributes(),
+    //         // ]);
+    //     });
+    // }
 
     protected $guarded = [];
 
@@ -47,4 +62,5 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    //history
 }
